@@ -1,70 +1,91 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
 
 export default function Home() {
-  const [nav, setNav] = useState(false);
-
-  const links = [
-    {
-      id: 1,
-      link: "home",
-    },
-    {
-      id: 2,
-      link: "about",
-    },
-    {
-      id: 3,
-      link: "portfolio",
-    },
-    {
-      id: 4,
-      link: "experience",
-    },
-    {
-      id: 5,
-      link: "contact",
-    },
+  const products = [
+    { name: "Homeopathic Remedy A", price: "$19.99" },
+    { name: "Natural Supplement B", price: "$24.99" },
+    { name: "Herbal Tincture C", price: "$15.99" },
+    { name: "Homeopathic Remedy D", price: "$19.99" },
+    { name: "Natural Supplement E", price: "$24.99" },
+    { name: "Herbal Tincture F", price: "$15.99" },
+    { name: "Homeopathic Remedy G", price: "$19.99" },
+    { name: "Natural Supplement H", price: "$24.99" },
+    { name: "Herbal Tincture I", price: "$15.99" },
   ];
+
   return (
-    <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-      <div className="flex justify-between items-center w-full h-20 px-4 text-white bg-black fixed nav">
-        <div>
-          {/* <h1 className="text-5xl font-signature ml-2"><a className="link-underline hover:transition ease-in-out delay-150 hover:underline hover:decoration-solid" href="">Logo</a></h1> */}
-          <h1 className="text-5xl font-signature ml-2">
-            <a className="link-underline link-underline-black" href="" target="_blank" rel="noreferrer">
-              Logo
-            </a>
-          </h1>
+    <div className="flex flex-col gap-8 items-center sm:items-start pt-8">
+      {/* Image container */}
+      <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
+        <div className="w-full h-48 sm:h-64 md:h-80 lg:h-96 relative overflow-hidden">
+          <img
+            src="/placeholderbanner.jpg"
+            alt="Banner"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+        
+        {/* Welcome text */}
+        <div className="mt-6 text-center">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-800">
+            Welcome to Lori Rose Homeopathy and thank you for choosing a Natural and gentle choice of healthcare for you and your animals.
+          </p>
         </div>
 
-        <ul className=" md:flex">
-          {links.map(({ id, link }) => (
-            <li
-              key={id}
-              className="nav-links px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 hover:text-white duration-200 link-underline"
-            >
-              <Link href={link}>{link}</Link>
-            </li>
-          ))}
-        </ul>
-
-        <div onClick={() => setNav(!nav)} className="cursor-pointer pr-4 z-10 text-gray-500 md:hidden"></div>
-
-        {nav && (
-          <ul className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-black to-gray-800 text-gray-500">
-            {links.map(({ id, link }) => (
-              <li key={id} className="px-4 cursor-pointer capitalize py-6 text-4xl">
-                <Link onClick={() => setNav(!nav)} href={link}>
-                  {link}
-                </Link>
-              </li>
+        {/* Product boxes */}
+        <div className="w-full mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.slice(0, 3).map((product, index) => (
+              <div key={index} className="border border-gray-200 rounded-lg p-4 flex flex-col items-center">
+                <img
+                  src="/placeholderbanner.jpg"
+                  alt={product.name}
+                  className="w-full h-48 object-cover object-center mb-4 rounded"
+                />
+                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+                <p className="text-gray-600 mb-4">{product.price}</p>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
+                  Add to Cart
+                </button>
+              </div>
             ))}
-          </ul>
-        )}
+          </div>
+          <hr className="border-t border-black my-8 mx-2 sm:mx-6 md:mx-12 lg:mx-16" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.slice(3, 6).map((product, index) => (
+              <div key={index} className="border border-gray-200 rounded-lg p-4 flex flex-col items-center">
+                <img
+                  src="/placeholderbanner.jpg"
+                  alt={product.name}
+                  className="w-full h-48 object-cover object-center mb-4 rounded"
+                />
+                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+                <p className="text-gray-600 mb-4">{product.price}</p>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
+                  Add to Cart
+                </button>
+              </div>
+            ))}
+          </div>
+          <hr className="border-t border-black my-8 mx-2 sm:mx-6 md:mx-12 lg:mx-16" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.slice(6, 9).map((product, index) => (
+              <div key={index} className="border border-gray-200 rounded-lg p-4 flex flex-col items-center">
+                <img
+                  src="/placeholderbanner.jpg"
+                  alt={product.name}
+                  className="w-full h-48 object-cover object-center mb-4 rounded"
+                />
+                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+                <p className="text-gray-600 mb-4">{product.price}</p>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
+                  Add to Cart
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
