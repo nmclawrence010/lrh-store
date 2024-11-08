@@ -1,7 +1,9 @@
 "use client";
+
 import Link from "next/link";
 import { useState } from "react";
-
+import { ShoppingCart, Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const Navigation = () => {
   const [nav, setNav] = useState(false);
@@ -15,20 +17,25 @@ const Navigation = () => {
   ];
 
   return (
-    <div className="flex justify-between items-center w-full h-20 px-4 text-white bg-black fixed nav z-50">
+    <div className="flex justify-between items-center w-full h-20 px-4 text-gray-800 bg-gray-50 fixed nav z-50 shadow-md">
       <div className="flex items-center h-full">
-        <h1 className="text-5xl font-signature ml-2">
-          <Link className="link-underline link-underline-black" href="/">
-            Logo
-          </Link>
-        </h1>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/placeholder.svg?height=40&width=40"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="mr-2"
+          />
+          <span className="text-2xl font-bold">Logo</span>
+        </Link>
       </div>
 
-      <ul className="absolute left-1/2 transform -translate-x-1/2 md:flex">
+      <ul className="hidden md:flex space-x-6">
         {links.map(({ id, link, text }) => (
           <li
             key={id}
-            className="nav-links px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 hover:text-white duration-200 link-underline"
+            className="nav-links cursor-pointer capitalize font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200"
           >
             <Link href={link}>{text}</Link>
           </li>
@@ -36,22 +43,53 @@ const Navigation = () => {
       </ul>
 
       <div className="flex items-center">
-        <div onClick={() => setNav(!nav)} className="cursor-pointer pr-4 z-10 text-gray-500 md:hidden"></div>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300 ml-4">
-          Your Cart
+        <button className="bg-[#e28743] text-white px-4 py-2 rounded-full hover:bg-[#c77738] transition duration-300 flex items-center space-x-2">
+          <ShoppingCart size={20} />
+          <span>Cart</span>
+        </button>
+        <button
+          onClick={() => setNav(!nav)}
+          className="ml-4 p-2 rounded-full hover:bg-gray-200 transition-colors duration-200 md:hidden"
+        >
+          {nav ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {nav && (
-        <ul className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-black to-gray-800 text-gray-500">
-          {links.map(({ id, link, text }) => (
-            <li key={id} className="px-4 cursor-pointer capitalize py-6 text-4xl">
-              <Link onClick={() => setNav(!nav)} href={link}>
-                {text}
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 md:hidden">
+          <div className="flex flex-col h-full bg-white w-64 p-4">
+            <div className="flex justify-between items-center mb-8">
+              <Link href="/" className="flex items-center" onClick={() => setNav(false)}>
+                <Image
+                  src="/placeholder.svg?height=40&width=40"
+                  alt="Logo"
+                  width={40}
+                  height={40}
+                  className="mr-2"
+                />
+                <span className="text-2xl font-bold">Logo</span>
               </Link>
-            </li>
-          ))}
-        </ul>
+              <button
+                onClick={() => setNav(false)}
+                className="p-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <ul className="flex flex-col space-y-4">
+              {links.map(({ id, link, text }) => (
+                <li
+                  key={id}
+                  className="nav-links cursor-pointer capitalize font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                >
+                  <Link href={link} onClick={() => setNav(false)}>
+                    {text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       )}
     </div>
   );
